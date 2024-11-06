@@ -11,17 +11,27 @@ public function agregarJugador(Jugador $jugador): void {
     $this->partido [] = $jugador;
 }
 public function verGanador(): void{
-    static $mayorpuntaje = 0;
-    $ganador = [];
-    foreach($this->partido as $jugador){
-       $sumaJuegos = $jugador->juegosTotales();
-    if($sumaJuegos > $mayorpuntaje){
-        $ganador = $jugador;
-        $mayorpuntaje = $sumaJuegos;
+    $jugador1 = $this->partido[0];
+    $jugador2 = $this->partido[1];
+    $setsJugador1 = $jugador1->getJuegosArray();
+    $setsJugador2 = $jugador2->getJuegosArray();
+    $ganador1 = 0;
+    $ganador2 = 0;
+    for ($i = 0; $i < count($setsJugador1); $i++) {
+        
+        $puntosJugador1 = $setsJugador1[$i];
+        $puntosJugador2 = $setsJugador2[$i];
+        if($puntosJugador1 > $puntosJugador2){
+            $ganador1++;
+        }else{
+            $ganador2++;
+        } 
     }
-    
-    }
-    echo "el ganador del partido es:" . $ganador->getNombre() . PHP_EOL;
+    if($ganador1 == 3){
+    echo "el ganador del partido es:" . $jugador1->getNombre() . PHP_EOL;
+    }else{
+    echo "el ganador del partido es:" . $jugador2->getNombre() . PHP_EOL;
+    } 
 }
 public function setConMayorDiferencia(): void {
     $mayorDiferencia = 0;
